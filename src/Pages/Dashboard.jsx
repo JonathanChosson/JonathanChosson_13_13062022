@@ -18,6 +18,13 @@ const Dashboard = () => {
         }
         axiosProfile(store)
     }, [dispatch, store])
+
+    function appearEditProfile() {
+        const editDiv = document.querySelector('.edit-div')
+        editDiv.classList.toggle('hidden')
+        const editBtn = document.querySelector('.edit-button')
+        editBtn.classList.toggle('hidden')
+    }
     return (
         <div>
             {profile.status === 'resolved' ? (
@@ -31,7 +38,34 @@ const Dashboard = () => {
                                 {profile.data.body.firstName}{' '}
                                 {profile.data.body.lastName}
                             </h1>
-                            <button className="edit-button">Edit Name</button>
+                            <button
+                                className="edit-button"
+                                onClick={appearEditProfile}
+                            >
+                                Edit Name
+                            </button>
+                            <div className="edit-div hidden">
+                                <input
+                                    className="edit-input"
+                                    type="text"
+                                    placeholder={profile.data.body.firstName}
+                                ></input>
+                                <input
+                                    className="edit-input"
+                                    type="text"
+                                    placeholder={profile.data.body.lastName}
+                                ></input>
+                                <br />
+                                <button className="edit-button-space">
+                                    Save
+                                </button>
+                                <button
+                                    className="edit-button-space"
+                                    onClick={appearEditProfile}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
                         </div>
                         <h2 className="sr-only">Accounts</h2>
                         <AccountInfos

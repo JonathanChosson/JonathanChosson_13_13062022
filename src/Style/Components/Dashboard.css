@@ -73,3 +73,23 @@
         width: 200px;
     }
 }
+
+.edit-div {
+    margin: 5px;
+}
+
+.edit-input {
+    margin: 5px;
+}
+
+.hidden {
+    display: none;
+}
+.edit-button-space {
+    border-color: #00bc77;
+    background-color: #00bc77;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px;
+    margin: 5px;
+}
