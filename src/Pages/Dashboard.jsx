@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Header from '../Components/Header'
 import '../Style/Components/Dashboard.css'
 import { useSelector, useStore, useDispatch } from 'react-redux'
-import { axiosProfile } from '../features/profile'
+import { axiosProfile, updateProfile } from '../features/profile'
 import { selectProfile } from '../utils/selectors'
 import { loginStorage } from '../features/login'
 import AccountInfos from '../Components/AccountInfos'
@@ -19,12 +19,28 @@ const Dashboard = () => {
         axiosProfile(store)
     }, [dispatch, store])
 
-    function appearEditProfile() {
-        const editDiv = document.querySelector('.edit-div')
-        editDiv.classList.toggle('hidden')
-        const editBtn = document.querySelector('.edit-button')
-        editBtn.classList.toggle('hidden')
+    function toggleHidden(div) {
+        div.classList.toggle('hidden')
     }
+
+    function appearEditProfile() {
+        toggleHidden(document.querySelector('.edit-div'))
+        toggleHidden(document.querySelector('.edit-button'))
+    }
+
+    function profileUpdate() {
+        const firstName = document.querySelector('.input__firstName').value
+            ? document.querySelector('.input__firstName').value
+            : document.querySelector('.input__firstName').placeholder
+        const lastName = document.querySelector('.input__lastName').value
+            ? document.querySelector('.input__lastName').value
+            : document.querySelector('.input__lastName').placeholder
+        updateProfile(store, {
+            firstName: firstName,
+            lastName: lastName,
+        })
+    }
+
     return (
         <div>
             {profile.status === 'resolved' ? (
@@ -46,17 +62,20 @@ const Dashboard = () => {
                             </button>
                             <div className="edit-div hidden">
                                 <input
-                                    className="edit-input"
+                                    className="edit-input input__firstName"
                                     type="text"
                                     placeholder={profile.data.body.firstName}
                                 ></input>
                                 <input
-                                    className="edit-input"
+                                    className="edit-input input__lastName"
                                     type="text"
                                     placeholder={profile.data.body.lastName}
                                 ></input>
                                 <br />
-                                <button className="edit-button-space">
+                                <button
+                                    className="edit-button-space"
+                                    onClick={profileUpdate}
+                                >
                                     Save
                                 </button>
                                 <button

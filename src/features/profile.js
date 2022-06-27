@@ -16,6 +16,7 @@ const REJECTED = 'profile/rejected'
 const profileAxios = () => ({ type: FETCHING })
 const profileResolved = (data) => ({ type: RESOLVED, payload: data })
 const profileRejected = (error) => ({ type: REJECTED, payload: error })
+const profileUpdate = () => ({ type: FETCHING })
 
 export async function axiosProfile(store) {
     let key = ''
@@ -32,6 +33,31 @@ export async function axiosProfile(store) {
         const response = await axios.post(
             BASE_URL + '/api/v1/user/profile',
             {},
+            { headers: { authorization: 'Bearer ' + key } }
+        )
+        const data = await response
+        store.dispatch(profileResolved(data.data))
+    } catch (error) {
+        console.log(error.response.data)
+        store.dispatch(profileRejected(error.response.data))
+    }
+}
+
+export async function updateProfile(store, input) {
+    let key = ''
+    if (store.getState().login.data) {
+        key = store.getState().login.data.body.token
+    }
+
+    const status = selectProfile(store.getState()).status
+    if (status === 'pending' || status === 'updating') {
+        return
+    }
+    store.dispatch(profileUpdate())
+    try {
+        const response = await axios.put(
+            BASE_URL + '/api/v1/user/profile',
+            input,
             { headers: { authorization: 'Bearer ' + key } }
         )
         const data = await response
