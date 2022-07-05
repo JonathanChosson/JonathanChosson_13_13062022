@@ -6,13 +6,12 @@
 
 -   Realization of an app with React and React-router
 -   Slicing into modular and reusable components
--   Using an libraire to generate chart
--   Create documentation of the project
+-   Using redux to manage store
 
 ## Project architecture :
 
 This project, called frontend, is to be cloned and launched locally.
-You could use the backend, or the mock see instruction below
+You could use the backend, see instruction below
 
 ## Installation
 
@@ -113,8 +112,6 @@ npm run dev:server
 
 npm run populate-db
 
-```
-
 Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
 
 ## Populated Database Data
@@ -123,22 +120,21 @@ Once you run the `populate-db` script, you should have two users in your databas
 
 ### Tony Stark
 
-- First Name: `Tony`
-- Last Name: `Stark`
-- Email: `tony@stark.com`
-- Password: `password123`
+-   First Name: `Tony`
+-   Last Name: `Stark`
+-   Email: `tony@stark.com`
+-   Password: `password123`
 
 ### Steve Rogers
 
-- First Name: `Steve`,
-- Last Name: `Rogers`,
-- Email: `steve@rogers.com`,
-- Password: `password456`
+-   First Name: `Steve`,
+-   Last Name: `Rogers`,
+-   Email: `steve@rogers.com`,
+-   Password: `password456`
 
 ## API Documentation
 
 To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
-
 
 <img src='https://img.shields.io/badge/Autor-Chosson Jonathan-blue' />
 
