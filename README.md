@@ -106,21 +106,27 @@ go to the back-end directory :
 $ cd JonathanChosson_13_13062022-/server
 ```
 
-# Install dependencies
+Install dependencies
 
+```
 npm install
+```
 
-# Start local dev server
+Start local dev server
 
+```
 npm run dev:server
+```
 
-# Populate database with two users
+Populate database with two users
 
+```
 npm run populate-db
+```
 
 Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
 
-## Populated Database Data
+### Populated Database Data
 
 Once you run the `populate-db` script, you should have two users in your database:
 
