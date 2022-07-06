@@ -1,0 +1,38 @@
+# Define the services/containers to be run
+services:
+  frontend: #name of the first service
+    build: ./ # specify the directory of the Dockerfile
+    ports:
+      - "3000:3000" # specify port forewarding
+    container_name: front-container
+    restart: always
+    volumes:
+      - images:/app/frontBank
+
+  mongodb:
+    image : mongo
+    container_name: mongodb
+    environment:
+    - PUID=1000
+    - PGID=1000
+    volumes:
+    - images:/app/back
+    ports:
+    - "27017:27017"
+    restart: unless-stopped
+
+  backend: #name of the second service
+    build: ./server # specify the directory of the Dockerfile
+    ports:
+      - "3001:3001" #specify ports forwarding
+    container_name: back-container
+    restart: always 
+    links: 
+      - mongodb
+    volumes:
+      - images:/app/back
+
+volumes:
+  images:
+
+  # docker exec back-container sh -c "npm run populate-db"

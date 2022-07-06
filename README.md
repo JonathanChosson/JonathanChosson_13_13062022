@@ -62,6 +62,12 @@ Launch the docker compose :
 $ docker-compose up --build -d
 ```
 
+After build in same bash fill the database :
+
+```
+$ docker exec back-container sh -c "npm run populate-db"
+```
+
 The project is on this adress : http://localhost:8080/
 
 ## Launch Manually (not-recommanded)
@@ -86,7 +92,7 @@ $ yarn install
 Start your local server :
 
 ```
-$ yarn dev
+$ yarn start
 ```
 
 The project is on this adress : http://localhost:8080/
