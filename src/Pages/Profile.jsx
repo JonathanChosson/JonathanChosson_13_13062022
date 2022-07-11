@@ -19,10 +19,6 @@ const Profile = () => {
             dispatch(loginStorage(JSON.parse(localStorage.getItem('JWT_Key'))))
         }
         axiosProfile(store)
-        setNewProfile({
-            firstName: store.getState().profile.data.body.firstName,
-            lastName: store.getState().profile.data.body.lastName,
-        })
     }, [dispatch, store])
 
     function toggleHidden(div) {
@@ -35,6 +31,7 @@ const Profile = () => {
     }
 
     function handlechange(e) {
+        e.preventDefault()
         if (e.target.id === 'firstName') {
             setNewProfile({
                 firstName: e.target.value,
@@ -49,12 +46,16 @@ const Profile = () => {
     }
 
     function profileUpdate() {
-        // const firstName = document.querySelector('.input__firstName').value
-        //     ? document.querySelector('.input__firstName').value
-        //     : document.querySelector('.input__firstName').placeholder
-        // const lastName = document.querySelector('.input__lastName').value
-        //     ? document.querySelector('.input__lastName').value
-        //     : document.querySelector('.input__lastName').placeholder
+        setNewProfile({
+            firstName:
+                newProfile.firstName === ''
+                    ? store.getState().profile.data.body.firstName
+                    : newProfile.firstName,
+            lastName:
+                newProfile.lastName === ''
+                    ? store.getState().profile.data.body.lastName
+                    : newProfile.lastName,
+        })
         updateProfile(store, newProfile)
     }
 
