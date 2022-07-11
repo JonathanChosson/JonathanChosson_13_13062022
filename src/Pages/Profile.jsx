@@ -7,8 +7,10 @@ import { selectProfile } from '../utils/selectors'
 import { loginStorage } from '../features/login'
 import AccountInfos from '../Components/AccountInfos'
 import Footer from '../Components/Footer'
+import { useState } from 'react'
 
 const Profile = () => {
+    const [newProfile, setNewProfile] = useState({})
     const store = useStore()
     const dispatch = useDispatch()
     const profile = useSelector(selectProfile)
@@ -17,6 +19,10 @@ const Profile = () => {
             dispatch(loginStorage(JSON.parse(localStorage.getItem('JWT_Key'))))
         }
         axiosProfile(store)
+        setNewProfile({
+            firstName: store.getState().profile.data.body.firstName,
+            lastName: store.getState().profile.data.body.lastName,
+        })
     }, [dispatch, store])
 
     function toggleHidden(div) {
@@ -28,17 +34,28 @@ const Profile = () => {
         toggleHidden(document.querySelector('.edit-button'))
     }
 
+    function handlechange(e) {
+        if (e.target.id === 'firstName') {
+            setNewProfile({
+                firstName: e.target.value,
+                lastName: newProfile.lastName,
+            })
+        } else if (e.target.id === 'lastName') {
+            setNewProfile({
+                firstName: newProfile.firstName,
+                lastName: e.target.value,
+            })
+        }
+    }
+
     function profileUpdate() {
-        const firstName = document.querySelector('.input__firstName').value
-            ? document.querySelector('.input__firstName').value
-            : document.querySelector('.input__firstName').placeholder
-        const lastName = document.querySelector('.input__lastName').value
-            ? document.querySelector('.input__lastName').value
-            : document.querySelector('.input__lastName').placeholder
-        updateProfile(store, {
-            firstName: firstName,
-            lastName: lastName,
-        })
+        // const firstName = document.querySelector('.input__firstName').value
+        //     ? document.querySelector('.input__firstName').value
+        //     : document.querySelector('.input__firstName').placeholder
+        // const lastName = document.querySelector('.input__lastName').value
+        //     ? document.querySelector('.input__lastName').value
+        //     : document.querySelector('.input__lastName').placeholder
+        updateProfile(store, newProfile)
     }
 
     return (
@@ -62,14 +79,18 @@ const Profile = () => {
                             </button>
                             <div className="edit-div hidden">
                                 <input
+                                    id="firstName"
                                     className="edit-input input__firstName"
                                     type="text"
                                     placeholder={profile.data.body.firstName}
+                                    onChange={handlechange}
                                 ></input>
                                 <input
+                                    id="lastName"
                                     className="edit-input input__lastName"
                                     type="text"
                                     placeholder={profile.data.body.lastName}
+                                    onChange={handlechange}
                                 ></input>
                                 <br />
                                 <button
