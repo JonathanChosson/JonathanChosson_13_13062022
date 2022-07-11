@@ -32,7 +32,7 @@ const Header = () => {
             </Link>
             {logged ? (
                 <div>
-                    <Link className="main-nav-item" to={'/dashboard'}>
+                    <Link className="main-nav-item" to={'/profile'}>
                         <FontAwesomeIcon icon={solid('user-circle')} />
                         {logged}
                     </Link>

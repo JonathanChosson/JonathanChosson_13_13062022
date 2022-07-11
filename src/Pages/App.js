@@ -3,7 +3,7 @@ import '../Style/Pages/App.css'
 import Home from './Home'
 import Error from './Error'
 import SignIn from './SignIn'
-import Dashboard from './Dashboard'
+import Profile from './Profile'
 
 function App() {
     return (
@@ -12,7 +12,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/sign_in" element={<SignIn />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/profile" element={<Profile />} />
                     <Route path="*" element={<Error />} />
                 </Routes>
             </BrowserRouter>

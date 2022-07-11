@@ -13,7 +13,7 @@ const SignInForm = () => {
 
     useEffect(() => {
         function dashboard() {
-            navigate('/dashboard')
+            navigate('/profile')
         }
         if (login.status === 'resolved') {
             dashboard()

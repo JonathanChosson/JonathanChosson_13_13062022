@@ -8,7 +8,7 @@ import { loginStorage } from '../features/login'
 import AccountInfos from '../Components/AccountInfos'
 import Footer from '../Components/Footer'
 
-const Dashboard = () => {
+const Profile = () => {
     const store = useStore()
     const dispatch = useDispatch()
     const profile = useSelector(selectProfile)
@@ -112,4 +112,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default Profile
