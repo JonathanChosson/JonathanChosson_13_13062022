@@ -10,7 +10,10 @@ import Footer from '../Components/Footer'
 import { useState } from 'react'
 
 const Profile = () => {
-    const [newProfile, setNewProfile] = useState({})
+    const [newProfile, setNewProfile] = useState({
+        firstName: '',
+        lastName: '',
+    })
     const store = useStore()
     const dispatch = useDispatch()
     const profile = useSelector(selectProfile)
@@ -46,17 +49,16 @@ const Profile = () => {
     }
 
     function profileUpdate() {
-        setNewProfile({
-            firstName:
-                newProfile.firstName === ''
-                    ? store.getState().profile.data.body.firstName
-                    : newProfile.firstName,
-            lastName:
-                newProfile.lastName === ''
-                    ? store.getState().profile.data.body.lastName
-                    : newProfile.lastName,
-        })
-        updateProfile(store, newProfile)
+        if (newProfile.firstName === '' && newProfile.lastName === '') {
+            console.log('vide')
+            updateProfile(store, {
+                firstName: store.getState().profile.data.body.firstName,
+
+                lastName: store.getState().profile.data.body.lastName,
+            })
+        } else {
+            updateProfile(store, newProfile)
+        }
     }
 
     return (
